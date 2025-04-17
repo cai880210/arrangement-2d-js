@@ -57,8 +57,8 @@ add_custom_command(
 # interface
 add_custom_command(
     OUTPUT ${TS_DEF_MOD_FILE} ${TS_DEF_UMD_FILE}
-    COMMAND npx webidl2ts -i ${WEBIDL_INTERFACE} -o ${TS_DEF_MOD_FILE} -ed -n ${MODULE_NAME}
-    COMMAND npx webidl2ts -i ${WEBIDL_INTERFACE} -o ${TS_DEF_UMD_FILE} -ed -n ${MODULE_NAME}
+    COMMAND npx @milkshakeio/webidl2ts -i ${WEBIDL_INTERFACE} -o ${TS_DEF_MOD_FILE} -ed -n ${MODULE_NAME}
+    COMMAND npx @milkshakeio/webidl2ts -i ${WEBIDL_INTERFACE} -o ${TS_DEF_UMD_FILE} -ed -n ${MODULE_NAME}
     COMMENT "Generating Typescript definitions"
     DEPENDS ${WEBIDL_INTERFACE}
     VERBATIM
@@ -88,7 +88,6 @@ set_target_properties(esm
       -s NO_EXIT_RUNTIME=1 \
       -s NO_FILESYSTEM=1 \
       -s EXPORT_NAME=${MODULE_NAME} \
-      -s DEMANGLE_SUPPORT=1 \
       --post-js ${CMAKE_BINARY_DIR}/glue.js \
     "
 )
@@ -110,7 +109,6 @@ set_target_properties(umd
       -s NO_EXIT_RUNTIME=1 \
       -s NO_FILESYSTEM=1 \
       -s EXPORT_NAME=${MODULE_NAME} \
-      -s DEMANGLE_SUPPORT=1 \
       --post-js ${CMAKE_BINARY_DIR}/glue.js \
     "
 )
